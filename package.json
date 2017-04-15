@@ -1,0 +1,22 @@
+{
+  "name": "eventos-tech-api",
+  "version": "1.0.0",
+  "description": "API Rest to eventos tech",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcoBrunoBR/eventos-tech-api.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Marco Bruno",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/MarcoBrunoBR/eventos-tech-api/issues"
+  },
+  "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme"
+}
