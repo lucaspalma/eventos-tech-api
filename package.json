@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/MarcoBrunoBR/eventos-tech-api/issues"
   },
-  "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme"
+  "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }
