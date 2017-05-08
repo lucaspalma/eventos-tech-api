@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3002
 const allEvents = [
   {
     name: 'QConSP',
@@ -19,7 +19,13 @@ const allEvents = [
   }
 ]
 
+app.use((req, res, next) => {
+  console.log(req.url)
+  next()
+})
+
 app.get('/allevents', (req, res) => res.json(allEvents))
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`)
