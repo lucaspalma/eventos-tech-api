@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "redis": "^2.7.1"
   }
 }
