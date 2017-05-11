@@ -19,12 +19,21 @@ const allEvents = [
   }
 ]
 
+const redis = require('redis')
+const client = redis.createClient()
+
+client.on('error', err => console.log(`Error ${err}`))
+
 app.use((req, res, next) => {
   console.log(req.url)
   next()
 })
 
-app.get('/allevents', (req, res) => res.json(allEvents))
+app.get('/allevents', (req, res) => {
+  client.hgetall('eventos:2017:frontinsampa', (err, replices) => {
+    res.json(replices)
+  })
+})
 
 
 app.listen(port, () => {
