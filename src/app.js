@@ -13,12 +13,24 @@ app.get('/allevents', (req, res) => {
 
   const events = db.get('events');
 
-  events.find({},{_id:false}).then((result)=> {
+  events.find({ },{_id:false,titulo:true,descricao:true, datas:true}).then((result)=> {
    res.json(result);
   });
 
  
 });
+
+app.get('/allevents/:tag',(req, res) => {
+  const tag = req.params.tag.toLowerCase();
+
+ 
+  const events = db.get('events');
+
+  events.find({tags: tag},{_id:false, titulo:true,descricao:true, datas:true}).then((result)=> {
+   res.json(result);
+  });
+
+})
 
 
 app.listen(port, () => {
