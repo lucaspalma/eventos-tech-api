@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "dev" : "node node_modules/nodemon/bin/nodemon src/app"
+    "dev": "node node_modules/nodemon/bin/nodemon src/app"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "monk": "^6.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
