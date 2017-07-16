@@ -12,7 +12,7 @@ class EventsController {
   }
 
   getAllInATag(req, res) {
-    const tag = req.params.tag.toLowerCase();
+    const tag = req.params.tag.toLowerCase()
 
     this.dao.getAllInATag(tag, (result) => {
       res.json(result)
@@ -21,6 +21,14 @@ class EventsController {
 
   getNext(req, res) {
     this.dao.getNext((result) => {
+      res.json(result)
+    })
+  }
+
+  getNextInTag(req, res) {
+    const tag = req.params.tag.toLowerCase()
+
+    this.dao.getNextInTag(tag, (result) => {
       res.json(result)
     })
   }
