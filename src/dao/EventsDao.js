@@ -20,6 +20,16 @@ class EventsDao {
         },
         {_id: false, name: true, dates: true, description: true, ticket: true}).then(callback)
   }
+
+  getNextInTag(tag, callback) {
+    this.events
+        .findOne({ $and: [
+            {firstDay: {$gt: new Date()}},
+            {tags: tag}
+          ]
+        },
+        {_id: false, name: true, dates: true, description: true, ticket: true}).then(callback)
+  }
 }
 
 module.exports = EventsDao
