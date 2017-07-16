@@ -1,6 +1,7 @@
 const EventsController = require('../controller/EventsController')
 
 module.exports = (app) => {
-  app.get('/allevents', EventsController.getAllEvents.bind(EventsController))
-  app.get('/allevents/:tag', EventsController.getAllEventsInATag.bind(EventsController))
+  app.get('/allevents', EventsController.getAll.bind(EventsController))
+  app.get('/allevents/:tag', EventsController.getAllInATag.bind(EventsController))
+  app.get('/next', EventsController.getNext.bind(EventsController))
 }

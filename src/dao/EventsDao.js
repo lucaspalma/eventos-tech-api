@@ -5,12 +5,20 @@ class EventsDao {
     this.events = db.get('events')
   }
 
-  getAllEvents(callback) {
-    this.events.find({}, {_id: false, name: true, description: true, dates: true}).then(callback);
+  getAll(callback) {
+    this.events.find({}, {_id: false, name: true, dates: true, ticket: true}).then(callback);
   }
 
-  getAllEventsInATag(tag, callback) {
-    this.events.find({tags: tag},{_id: false, name: true, description: true, dates: true}).then(callback)
+  getAllInATag(tag, callback) {
+    this.events.find({tags: tag},{_id: false, name: true, dates: true, ticket: true}).then(callback)
+  }
+
+  getNext(callback) {
+    this.events
+        .findOne({
+          firstDay: {$gt: new Date()}
+        },
+        {_id: false, name: true, dates: true, description: true, ticket: true}).then(callback)
   }
 }
 

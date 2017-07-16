@@ -5,16 +5,22 @@ class EventsController {
     this.dao = new EventsDao()
   }
 
-  getAllEvents(req, res) {
-    this.dao.getAllEvents((result) => {
+  getAll(req, res) {
+    this.dao.getAll((result) => {
       res.json(result)
     })
   }
 
-  getAllEventsInATag(req, res) {
+  getAllInATag(req, res) {
     const tag = req.params.tag.toLowerCase();
 
-    this.dao.getAllEventsInATag(tag, (result) => {
+    this.dao.getAllInATag(tag, (result) => {
+      res.json(result)
+    })
+  }
+
+  getNext(req, res) {
+    this.dao.getNext((result) => {
       res.json(result)
     })
   }
