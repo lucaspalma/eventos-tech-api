@@ -2,7 +2,7 @@
   "name": "eventos-tech-api",
   "version": "1.0.0",
   "description": "API Rest to eventos tech",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server",
@@ -10,18 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MarcoBrunoBR/eventos-tech-api.git"
+    "url": "git+https://github.com/CollabCodeBR/eventos-tech-api"
   },
   "keywords": [
     "api"
   ],
-  "author": "Marco Bruno",
+  "author": "CollabCode",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/MarcoBrunoBR/eventos-tech-api/issues"
+    "url": "https://github.com/CollabCodeBR/eventos-tech-api/issues"
   },
-  "homepage": "https://github.com/MarcoBrunoBR/eventos-tech-api#readme",
+  "homepage": "https://github.com/CollabCodeBR/eventos-tech-api#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.2",
     "monk": "^6.0.1"
   },
