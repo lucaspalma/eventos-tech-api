@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/CollabCodeBR/eventos-tech-api#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.2",
     "monk": "^6.0.1"
   },
