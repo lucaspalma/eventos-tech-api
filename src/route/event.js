@@ -1,6 +1,8 @@
-const EventsController = require('../controller/EventsController')
+const EventsController = require('../controller/EventController')
 
 module.exports = (app) => {
+  app.post('/new-event', EventsController.new.bind(EventsController))
+
   app.get('/all-next-events', EventsController.getAll.bind(EventsController))
   app.get('/all-next-events/:tag', EventsController.getAllInATag.bind(EventsController))
 

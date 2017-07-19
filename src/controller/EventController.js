@@ -1,8 +1,16 @@
-const EventsDao = require('../dao/EventsDao')
+const EventDao = require('../dao/EventDao')
 
 class EventsController {
   constructor() {
-    this.dao = new EventsDao()
+    this.dao = new EventDao()
+  }
+
+  new(req, res) {
+    const event = req.body
+
+    this.dao.new(event, (result) => {
+      res.json(result)
+    })
   }
 
   getAll(req, res) {

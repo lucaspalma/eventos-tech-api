@@ -1,20 +1,24 @@
-const db = require('monk')('localhost/eventos-tech-api')
+const mongoose = require('mongoose')
 
 class EventsDao {
   constructor() {
-    this.events = db.get('events')
+    this.event = mongoose.model('Event')
+  }
+
+  new(event, callback) {
+    this.event.create(event).then(callback)
   }
 
   getAll(callback) {
-    this.events.find({}, {_id: false, name: true, dates: true, ticket: true}).then(callback);
+    this.event.find({}, {_id: false, name: true, dates: true, ticket: true}).then(callback);
   }
 
   getAllInATag(tag, callback) {
-    this.events.find({tags: tag},{_id: false, name: true, dates: true, ticket: true}).then(callback)
+    this.event.find({tags: tag},{_id: false, name: true, dates: true, ticket: true}).then(callback)
   }
 
   getNext(callback) {
-    this.events
+    this.event
         .findOne({
           firstDay: {$gt: new Date()}
         },
@@ -22,7 +26,7 @@ class EventsDao {
   }
 
   getNextInTag(tag, callback) {
-    this.events
+    this.event
         .findOne({ $and: [
             {firstDay: {$gt: new Date()}},
             {tags: tag}
