@@ -1,4 +1,4 @@
-const db = require('monk')('localhost/eventos-tech-api')
+const db = require('monk')(`${process.env.DB_URL}/${process.env.DB_NAME}`)
 
 class EventsDao {
   constructor() {

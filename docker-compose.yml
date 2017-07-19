@@ -12,8 +12,20 @@ services:
         - MONGODB_HOST=mongo
         - MONGODB_PORT=27017
       volumes:
-        - <REPLACE-WITH-YOUR-DUMP-FOLDER>:/dump
+        - ./dump:/dump
       depends_on:
         - mongo
+    app:
+      image: collabcode/eventos-tech-api
+      restart: on-failure
+      depends_on:
+        - mongo
+      ports:
+        - "3000:3000"
+      volumes:
+        - .:/app
+      environment:
+        - DB_URL=mongo
+        - DB_NAME=eventos-tech-api
 networks:
   db:
