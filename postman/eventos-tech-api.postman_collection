@@ -1,0 +1,61 @@
+{
+	"variables": [],
+	"info": {
+		"name": "eventos-tech-api",
+		"_postman_id": "8292b22e-edda-b329-da38-ef986babdbff",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dev",
+			"description": "",
+			"item": [
+				{
+					"name": "Next event",
+					"request": {
+						"url": "http://localhost:3000/next-event",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Next event of tag frontend",
+					"request": {
+						"url": "http://localhost:3000/next-event/frontend",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "All the next events",
+					"request": {
+						"url": "http://localhost:3000/all-next-events",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "All the next events of tag java",
+					"request": {
+						"url": "http://localhost:3000/all-next-events/java",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
