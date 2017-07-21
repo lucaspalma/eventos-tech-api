@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/dao/EventDao.js
 const mongoose = require('mongoose')
+=======
+const db = require('monk')(`${process.env.DB_URL}/${process.env.DB_NAME}`)
+>>>>>>> master:src/dao/EventsDao.js
 
 class EventsDao {
   constructor() {
