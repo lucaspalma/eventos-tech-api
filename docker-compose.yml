@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+    mongo:
+      image: mongo
+      ports:
+        - "27017:27017"
+    mongo-restore:
+      image: collabcode/db-restore
+      restart: on-failure
+      environment:
+        - MONGODB_HOST=mongo
+        - MONGODB_PORT=27017
+      volumes:
+        - ./dump:/dump
+      depends_on:
+        - mongo
+    app:
+      image: collabcode/eventos-tech-api
+      restart: on-failure
+      depends_on:
+        - mongo
+      ports:
+        - "3000:3000"
+      volumes:
+        - .:/app
+      environment:
+        - DB_URL=mongo
+        - DB_NAME=eventos-tech-api
+networks:
+  db:
