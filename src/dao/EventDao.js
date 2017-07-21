@@ -9,30 +9,33 @@ class EventsDao {
     this.event.create(event).then(callback)
   }
 
-  getAll(callback) {
+  getAllNext(callback) {
     this.event.find({}, {_id: false, name: true, dates: true, ticket: true}).then(callback);
   }
 
-  getAllInATag(tag, callback) {
+  getAllNextInATag(tag, callback) {
     this.event.find({tags: tag},{_id: false, name: true, dates: true, ticket: true}).then(callback)
   }
 
-  getNext(callback) {
+  getNextByAmount(amount, callback) {
     this.event
-        .findOne({
+        .find({
           firstDay: {$gt: new Date()}
         },
-        {_id: false, name: true, dates: true, description: true, ticket: true}).then(callback)
+        {_id: false, name: true, dates: true, description: true, ticket: true})
+        .limit(amount).then(callback)
   }
 
-  getNextInTag(tag, callback) {
+  getlNextInTagByAmount(tag, amount, callback) {
     this.event
         .findOne({ $and: [
             {firstDay: {$gt: new Date()}},
             {tags: tag}
           ]
         },
-        {_id: false, name: true, dates: true, description: true, ticket: true}).then(callback)
+        {_id: false, name: true, dates: true, description: true, ticket: true})
+        .find(amount)
+        .then(callback)
   }
 }
 

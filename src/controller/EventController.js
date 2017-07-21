@@ -13,30 +13,33 @@ class EventsController {
     })
   }
 
-  getAll(req, res) {
-    this.dao.getAll((result) => {
+  getAllNext(req, res) {
+    this.dao.getAllNext((result) => {
       res.json(result)
     })
   }
 
-  getAllInATag(req, res) {
+  getAllNextInATag(req, res) {
     const tag = req.params.tag.toLowerCase()
 
-    this.dao.getAllInATag(tag, (result) => {
+    this.dao.getAllNextInATag(tag, (result) => {
       res.json(result)
     })
   }
 
-  getNext(req, res) {
-    this.dao.getNext((result) => {
+  getNextByAmount(req, res) {
+    const amount = parseInt(req.params.amount)
+
+    this.dao.getNextByAmount(amount, (result) => {
       res.json(result)
     })
   }
 
-  getNextInTag(req, res) {
+  getlNextInTagByAmount(req, res) {
     const tag = req.params.tag.toLowerCase()
+    const amount = parseInt(req.params.amount)
 
-    this.dao.getNextInTag(tag, (result) => {
+    this.dao.getlNextInTagByAmount(tag, amount, (result) => {
       res.json(result)
     })
   }
