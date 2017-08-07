@@ -28,13 +28,18 @@ class EventsDao {
 
   getlNextInTagByAmount(tag, amount, callback) {
     this.Event
-        .find({ $and: [
-            {firstDay: {$gt: new Date()}},
+        .find({
+          $and: [
+            {firstDay: {$lt: new Date()}},
             {tags: tag}
           ]
         },
         {_id: false})
         .limit(amount).exec(callback)
+  }
+
+  getAllPrevious(callback) {
+    this.Event.find({firstDay: {$lt: new Date()}}, {_id: false}, callback);
   }
 }
 

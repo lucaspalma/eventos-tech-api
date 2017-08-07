@@ -10,4 +10,6 @@ router.get('/next/tag/:tag', EventController.getAllNextInATag.bind(EventControll
 router.get('/next/amount/:amount', EventController.getNextByAmount.bind(EventController))
 router.get('/next/tag/:tag/amount/:amount', EventController.getlNextInTagByAmount.bind(EventController))
 
+router.get('/previous', EventController.getAllPrevious.bind(EventController))
+
 module.exports = router
