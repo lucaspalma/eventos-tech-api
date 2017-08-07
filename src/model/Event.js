@@ -12,6 +12,4 @@ const eventSchema = mongoose.Schema({
   exist: {type: Boolean, required: false, default: false}
 })
 
-console.log('PASSOU AQUI')
-
 mongoose.model('Event', eventSchema)
