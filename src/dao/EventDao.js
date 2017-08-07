@@ -5,37 +5,37 @@ class EventsDao {
     this.event = mongoose.model('Event')
   }
 
-  new(event, callback) {
-    this.event.create(event).then(callback)
+  new(event, success, error) {
+    this.event.create(event).then(success, error)
   }
 
-  getAllNext(callback) {
-    this.event.find({}, {_id: false, name: true, dates: true, ticket: true}).then(callback);
+  getAllNext(success, error) {
+    this.event.find({}, {_id: false}).then(success, error);
   }
 
-  getAllNextInATag(tag, callback) {
-    this.event.find({tags: tag},{_id: false, name: true, dates: true, ticket: true}).then(callback)
+  getAllNextInATag(tag, success, error) {
+    this.event.find({tags: tag}, {_id: false}).then(success, error)
   }
 
-  getNextByAmount(amount, callback) {
+  getNextByAmount(amount, success, error) {
     this.event
         .find({
           firstDay: {$gt: new Date()}
         },
-        {_id: false, name: true, dates: true, description: true, ticket: true})
-        .limit(amount).then(callback)
+        {_id: false})
+        .limit(amount).then(success, error)
   }
 
-  getlNextInTagByAmount(tag, amount, callback) {
+  getlNextInTagByAmount(tag, amount, success, error) {
     this.event
-        .findOne({ $and: [
+        .find({ $and: [
             {firstDay: {$gt: new Date()}},
             {tags: tag}
           ]
         },
-        {_id: false, name: true, dates: true, description: true, ticket: true})
+        {_id: false})
         .find(amount)
-        .then(callback)
+        .then(success, error)
   }
 }
 

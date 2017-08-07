@@ -3,6 +3,9 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 
+require('../model/Event')
+const event = require('../route/event')
+
 require('./mongodb')
 
 app.use(cors())
@@ -13,8 +16,7 @@ app.use((req, res, next) => {
   next()
 })
 
-require('../model/Event')
-require('../route/event')(app)
+app.use('/event', event)
 
 app.use((req, res) => {
   res.status(404).json({status: `The requested URL ${req.url} was not found on this server.`})

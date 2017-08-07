@@ -1,12 +1,14 @@
+const express = require('express')
+const router = express.Router()
 const EventController = require('../controller/EventController')
 
-module.exports = (app) => {
-  app.route('/event')
-     .post(EventController.new.bind(EventController))
+router.route('/')
+   .post(EventController.new.bind(EventController))
 
-  app.get('/event/next', EventController.getAllNext.bind(EventController))
-  app.get('/event/next/:tag', EventController.getAllNextInATag.bind(EventController))
+router.get('/next', EventController.getAllNext.bind(EventController))
+router.get('/next/tag/:tag', EventController.getAllNextInATag.bind(EventController))
 
-  app.get('/event/next/:amount', EventController.getNextByAmount.bind(EventController))
-  app.get('/event/next/:tag/:amount', EventController.getlNextInTagByAmount.bind(EventController))
-}
+router.get('/next/amount/:amount', EventController.getNextByAmount.bind(EventController))
+router.get('/next/tag/:tag/amount/:amount', EventController.getlNextInTagByAmount.bind(EventController))
+
+module.exports = router
