@@ -12,23 +12,21 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Next event",
+					"name": "Register event",
 					"request": {
-						"url": "http://localhost:3000/event/next/amount/1",
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Next event of tag frontend",
-					"request": {
-						"url": "http://localhost:3000/event/next/amount/3",
-						"method": "GET",
-						"header": [],
-						"body": {},
+						"url": "http://localhost:3000/event",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"FrontInSampa\",\n    \"logo\" : \"/img/logos/frontinsampa.svg\",\n    \"description\" : \"Melhor evento de FrontEnd em São Paulo\",\n    \"firstDay\" : \"2018-12-25\",\n    \"dates\" : [ \n        \"2017-02-12\"\n    ],\n    \"site\" : \"http://frontinsampa.com.br\",\n    \"ticket\" : \"http://frontinsampa.com.br/ticket\",\n    \"tags\" : [ \n        \"frontend\", \n        \"javascript\", \n        \"html\", \n        \"css\", \n        \"ux\"\n    ]\n}"
+						},
 						"description": ""
 					},
 					"response": []
@@ -65,41 +63,23 @@
 					"response": []
 				},
 				{
-					"name": "Register event",
+					"name": "Next event by amount",
 					"request": {
-						"url": "http://localhost:3000/event",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\" : \"FrontInSampa\",\n    \"logo\" : \"/img/logos/frontinsampa.svg\",\n    \"description\" : \"Melhor evento de FrontEnd em São Paulo\",\n    \"firstDay\" : \"2018-12-25\",\n    \"dates\" : [ \n        \"2018-12-25\"\n    ],\n    \"site\" : \"http://frontinsampa.com.br\",\n    \"ticket\" : \"http://frontinsampa.com.br/ticket\",\n    \"tags\" : [ \n        \"frontend\", \n        \"javascript\", \n        \"html\", \n        \"css\", \n        \"ux\"\n    ]\n}"
-						},
+						"url": "http://localhost:3000/event/next/amount/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "Register event with error",
+					"name": "Next event in tag by amount",
 					"request": {
-						"url": "http://localhost:3000/event",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\" : \"FrontInSampa\",\n    \"firstDay\" : \"2018-12-25\",\n    \"dates\" : [ \n        \"2018-12-25dfjalj\"\n    ],\n    \"site\" : \"http://frontinsampa.com.br\",\n    \"ticket\" : \"http://frontinsampa.com.br/ticket\",\n    \"tags\" : [ \n        \"frontend\", \n        \"javascript\", \n        \"html\", \n        \"css\", \n        \"ux\"\n    ]\n}"
-						},
+						"url": "http://localhost:3000/event/next/tag/frontend/amount/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
 						"description": ""
 					},
 					"response": []
