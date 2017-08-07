@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 const EventController = require('../controller/EventController')
 
-router.route('/')
-   .post(EventController.new.bind(EventController))
+router.route('/').post(EventController.new.bind(EventController))
 
 router.get('/next', EventController.getAllNext.bind(EventController))
 router.get('/next/tag/:tag', EventController.getAllNextInATag.bind(EventController))
