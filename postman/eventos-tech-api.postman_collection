@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "eventos-tech-api",
-		"_postman_id": "8292b22e-edda-b329-da38-ef986babdbff",
+		"_postman_id": "85d9973d-c61f-217f-ed8d-7fdf6b62f09f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 				{
 					"name": "Next event",
 					"request": {
-						"url": "http://localhost:3000/next-event",
+						"url": "http://localhost:3000/event/next/amount/1",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -25,7 +25,7 @@
 				{
 					"name": "Next event of tag frontend",
 					"request": {
-						"url": "http://localhost:3000/next-event/frontend",
+						"url": "http://localhost:3000/event/next/amount/3",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -36,7 +36,27 @@
 				{
 					"name": "All the next events",
 					"request": {
-						"url": "http://localhost:3000/all-next-events",
+						"url": "http://localhost:3000/event/next",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"forma_de_pagamento\": \"boleto\",\n  \"valor\": 100.20,\n  \"moeda\": \"BRL\",\n  \"descricao\": \"pagamento em boleto do meu cartao de credito\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "All the next events of tag java",
+					"request": {
+						"url": "http://localhost:3000/event/next/tag/java",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -45,12 +65,41 @@
 					"response": []
 				},
 				{
-					"name": "All the next events of tag java",
+					"name": "Register event",
 					"request": {
-						"url": "http://localhost:3000/all-next-events/java",
-						"method": "GET",
-						"header": [],
-						"body": {},
+						"url": "http://localhost:3000/event",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"FrontInSampa\",\n    \"logo\" : \"/img/logos/frontinsampa.svg\",\n    \"description\" : \"Melhor evento de FrontEnd em São Paulo\",\n    \"firstDay\" : \"2018-12-25\",\n    \"dates\" : [ \n        \"2018-12-25\"\n    ],\n    \"site\" : \"http://frontinsampa.com.br\",\n    \"ticket\" : \"http://frontinsampa.com.br/ticket\",\n    \"tags\" : [ \n        \"frontend\", \n        \"javascript\", \n        \"html\", \n        \"css\", \n        \"ux\"\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Register event with error",
+					"request": {
+						"url": "http://localhost:3000/event",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"FrontInSampa\",\n    \"firstDay\" : \"2018-12-25\",\n    \"dates\" : [ \n        \"2018-12-25dfjalj\"\n    ],\n    \"site\" : \"http://frontinsampa.com.br\",\n    \"ticket\" : \"http://frontinsampa.com.br/ticket\",\n    \"tags\" : [ \n        \"frontend\", \n        \"javascript\", \n        \"html\", \n        \"css\", \n        \"ux\"\n    ]\n}"
+						},
 						"description": ""
 					},
 					"response": []
