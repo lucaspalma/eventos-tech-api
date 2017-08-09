@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
+const compression = require('compression')
 const app = express()
 
 require('../model/Event')
@@ -10,6 +11,7 @@ require('./mongodb')
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(compression({threshold:1}))
 
 app.use((req, res, next) => {
   console.log(req.url)
