@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const EventController = require('../controller/EventController')
 
-router.route('/').post((req, res) => EventController.new(req, res))
+router.post('/', (req, res) => EventController.new(req, res))
 
 router.get('/next', (req, res) => EventController.getAllNext(req, res))
 router.get('/next/tag/:tag', (req, res) => EventController.getAllNextInATag(req, res))
