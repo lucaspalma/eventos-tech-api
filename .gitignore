@@ -3,3 +3,5 @@ node_modules
 mongodb
 package-lock.json
 npm-debug.log
+
+.idea/
