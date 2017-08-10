@@ -39,8 +39,16 @@ class EventsDao {
   }
 
   getAllPrevious(callback) {
-    this.Event.find({firstDay: {$lt: new Date()}}, {_id: false}, callback);
+    this.Event.find({firstDay: {$lt: new Date()}}, {_id: false}, callback)
   }
+
+	getAll(callback) {
+		this.Event.find({}, {}, callback)
+	}
+
+	update(id, event, callback) {
+		this.Event.update({_id: id}, event, callback)
+	}
 }
 
 module.exports = EventsDao

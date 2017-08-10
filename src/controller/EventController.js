@@ -5,10 +5,25 @@ class EventsController {
     this.dao = new EventDao()
   }
 
+  getAll(req, res) {
+    this.dao.getAll((error, result) => {
+      res.json(result)
+    })
+  }
+
   new(req, res) {
     const event = req.body
 
     this.dao.new(event, (error, result) => {
+      res.json(result)
+    })
+  }
+
+  update(req, res) {
+    const event = req.body
+    const id = req.params.id
+
+    this.dao.update(id, event, (error, result) => {
       res.json(result)
     })
   }
