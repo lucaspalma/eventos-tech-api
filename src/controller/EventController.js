@@ -5,6 +5,12 @@ class EventsController {
     this.dao = new EventDao()
   }
 
+  getAll(req, res) {
+    this.dao.getAll((error, result) => {
+      res.json(result)
+    })
+  }
+
   new(req, res) {
     const event = req.body
 
