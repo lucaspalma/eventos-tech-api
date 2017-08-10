@@ -43,7 +43,11 @@ class EventsDao {
   }
 
 	getAll(callback) {
-		this.Event.find({}, {_id: false}, callback)
+		this.Event.find({}, {}, callback)
+	}
+
+	update(id, event, callback) {
+		this.Event.update({_id: id}, event, callback)
 	}
 }
 
