@@ -4,7 +4,7 @@
   "description": "API Rest to eventos tech",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node src/server",
     "dev": "nodemon src/server"
   },
@@ -29,6 +29,8 @@
     "mongoose": "^4.11.3"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.0",
     "nodemon": "^1.11.0"
   }
 }
