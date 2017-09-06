@@ -6,7 +6,7 @@ class EventsDao {
   }
 
   new(event, callback) {
-    this.Event.create(event, callback)
+    return this.Event.create(event, callback)
   }
 
   getAllNext(callback) {
@@ -43,7 +43,7 @@ class EventsDao {
   }
 
 	getAll(callback) {
-		this.Event.find({}, {_id: false, __v: false}, callback)
+		return this.Event.find({}, {_id: false, __v: false}, callback)
 	}
 
 	update(id, event, callback) {
