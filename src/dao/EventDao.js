@@ -39,7 +39,8 @@ class EventsDao {
   }
 
   getAllPrevious(callback) {
-    this.Event.find({firstDay: {$lt: new Date()}}, {_id: false}, callback)
+    let today = new Date().toDateString()
+    return this.Event.find({firstDay: {$lt: today}}, {_id: false, __v : false}, callback)
   }
 
 	getAll(callback) {
