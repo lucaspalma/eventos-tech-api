@@ -6,10 +6,12 @@ require('./DateUtils')
 let expect = require('chai').expect
 let mongoose = require('mongoose')
 const EventDao = require('../src/dao/EventDao')
+const Mother = require('./builders/Mother')
 
 describe('EventDao', () =>{
 
   let dao
+  const mother = new Mother()
 
   before(() => {    
     dao = new EventDao()
@@ -20,17 +22,7 @@ describe('EventDao', () =>{
   })
 
   it(' should return an event inserted at the database ', async () => {  
-    let event = {
-      name : "FrontInSampa",
-      logo : "/img/logos/frontinsampa.svg",
-      description : "Melhor evento de FrontEnd em São Paulo",
-      firstDay : new Date(2018, 11, 25, 0, 0, 0, 0),
-      site : "http://frontinsampa.com.br",
-      ticket : "http://frontinsampa.com.br/ticket",
-      exist : false,
-      tags : [ 'frontend', 'javascript', 'html', 'css', 'ux' ],
-      dates : [ new Date(2017, 2, 12, 0, 0, 0, 0) ]
-    }
+    let event = new EventBuilder().get()
     await dao.new(event)
     await dao.getAll((error, result) => {
       expect(result).to.have.length(1)
@@ -43,39 +35,9 @@ describe('EventDao', () =>{
     let today = new Date()
     let yesterday =  today.getYesterday()
     let tomorrow =  today.getTomorrow()
-    let eventToday = {
-      name : "FrontInSampa",
-      logo : "/img/logos/frontinsampa.svg",
-      description : "Melhor evento de FrontEnd em São Paulo",
-      firstDay : today,
-      site : "http://frontinsampa.com.br",
-      ticket : "http://frontinsampa.com.br/ticket",
-      exist : false,
-      tags : [ 'frontend', 'javascript', 'html', 'css', 'ux' ],
-      dates : [ today ]
-    }
-    let eventYesterday = {
-      name : "FrontInSampa",
-      logo : "/img/logos/frontinsampa.svg",
-      description : "Melhor evento de FrontEnd em São Paulo",
-      firstDay : yesterday,
-      site : "http://frontinsampa.com.br",
-      ticket : "http://frontinsampa.com.br/ticket",
-      exist : false,
-      tags : [ 'frontend', 'javascript', 'html', 'css', 'ux' ],
-      dates : [ yesterday ]
-    }
-    let eventTomorrow = {
-      name : "FrontInSampa",
-      logo : "/img/logos/frontinsampa.svg",
-      description : "Melhor evento de FrontEnd em São Paulo",
-      firstDay : tomorrow,
-      site : "http://frontinsampa.com.br",
-      ticket : "http://frontinsampa.com.br/ticket",
-      exist : false,
-      tags : [ 'frontend', 'javascript', 'html', 'css', 'ux' ],
-      dates : [ tomorrow ]
-    }
+    let eventYesterday = mother.createAnEvent().starting(yesterday).get()
+    let eventToday = mother.createAnEvent().starting(today).get()
+    let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
     await dao.new(eventToday)
     await dao.new(eventYesterday)
     await dao.new(eventTomorrow)
