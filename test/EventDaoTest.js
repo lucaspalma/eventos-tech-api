@@ -22,7 +22,7 @@ describe('EventDao', () =>{
   })
 
   it(' should return an event inserted at the database ', async () => {  
-    let event = new EventBuilder().get()
+    let event = mother.createAnEvent().get()
     await dao.new(event)
     await dao.getAll((error, result) => {
       expect(result).to.have.length(1)
