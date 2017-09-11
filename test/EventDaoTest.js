@@ -25,9 +25,8 @@ describe('EventDao', () =>{
     let event = mother.createAnEvent().get()
     await dao.new(event)
     await dao.getAll((error, result) => {
-      expect(result).to.have.length(1)
-      const eventLoaded = result[0]._doc
-      expect(eventLoaded).to.eql(event)
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([event])
     })
   })
 
@@ -42,9 +41,8 @@ describe('EventDao', () =>{
     await dao.new(eventYesterday)
     await dao.new(eventTomorrow)
     await dao.getAllPrevious((error, result) => {
-      expect(result).to.have.length(1)
-      let eventLoaded = result[0]._doc
-      expect(eventLoaded).to.eql(eventYesterday)
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventYesterday])
     })
   })
 
@@ -59,15 +57,16 @@ describe('EventDao', () =>{
     await dao.new(eventYesterday)
     await dao.new(eventTomorrow)
     await dao.getAllNext((error, result) => {
-      expect(result).to.have.length(2)
-      let eventLoaded = result[0]._doc
-      expect(eventLoaded).to.eql(eventToday)
-      eventLoaded = result[1]._doc
-      expect(eventLoaded).to.eql(eventTomorrow)
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventToday, eventTomorrow])
     })
   })
 
   after(() => {
     mongoose.disconnect()
   })
+
+  function getEventsFrom(result) {
+    return result.map((event) => event._doc)
+  }
 })
