@@ -10,7 +10,8 @@ class EventsDao {
   }
 
   getAllNext(callback) {
-    this.Event.find({firstDay: {$gt: new Date()}}, {_id: false}, callback)
+    let today = new Date().toDateString()
+    return this.Event.find({firstDay: {$gte: today}}, {_id: false, __v: false}, callback)
   }
 
   getAllNextInATag(tag, callback) {
