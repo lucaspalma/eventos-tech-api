@@ -48,6 +48,25 @@ describe('EventDao', () =>{
     })
   })
 
+  it(' should return all upcomming events ', async () => {
+    let today = new Date()
+    let yesterday =  today.getYesterday()
+    let tomorrow =  today.getTomorrow()
+    let eventYesterday = mother.createAnEvent().starting(yesterday).get()
+    let eventToday = mother.createAnEvent().starting(today).get()
+    let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
+    await dao.new(eventToday)
+    await dao.new(eventYesterday)
+    await dao.new(eventTomorrow)
+    await dao.getAllNext((error, result) => {
+      expect(result).to.have.length(2)
+      let eventLoaded = result[0]._doc
+      expect(eventLoaded).to.eql(eventToday)
+      eventLoaded = result[1]._doc
+      expect(eventLoaded).to.eql(eventTomorrow)
+    })
+  })
+
   after(() => {
     mongoose.disconnect()
   })
