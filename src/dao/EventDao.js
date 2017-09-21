@@ -19,12 +19,13 @@ class EventsDao {
   }
 
   getNextByAmount(amount, callback) {
-    this.Event
-        .find({
-          firstDay: {$gt: new Date()}
-        },
-        {_id: false})
-        .limit(amount).exec(callback)
+    let today = new Date().toDateString()
+    return this.Event
+              .find({
+                firstDay: {$gte: today}
+              },
+              {_id: false, __v: false})
+              .limit(amount).exec(callback)
   }
 
   getlNextInTagByAmount(tag, amount, callback) {
