@@ -12,6 +12,10 @@ describe('EventDao', () =>{
 
   let dao
   const mother = new Mother()
+  const today = new Date()
+  const yesterday =  today.getYesterday()
+  const tomorrow =  today.getTomorrow()
+  const nextWeek =  today.getNextWeek()
 
   before(() => {    
     dao = new EventDao()
@@ -31,9 +35,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return all previous events ', async () => {
-    let today = new Date()
-    let yesterday =  today.getYesterday()
-    let tomorrow =  today.getTomorrow()
     let eventYesterday = mother.createAnEvent().starting(yesterday).get()
     let eventToday = mother.createAnEvent().starting(today).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
@@ -47,9 +48,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return all upcomming events ', async () => {
-    let today = new Date()
-    let yesterday =  today.getYesterday()
-    let tomorrow =  today.getTomorrow()
     let eventYesterday = mother.createAnEvent().starting(yesterday).get()
     let eventToday = mother.createAnEvent().starting(today).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
@@ -63,10 +61,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return the next 2 events ', async () => {
-    let today = new Date()
-    let yesterday =  today.getYesterday()
-    let tomorrow =  today.getTomorrow()
-    let nextWeek =  today.getNextWeek()
     let eventYesterday = mother.createAnEvent().starting(yesterday).get()
     let eventToday = mother.createAnEvent().starting(today).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
@@ -84,9 +78,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return events with tag java ', async () => {
-    let today = new Date()
-    let tomorrow =  today.getTomorrow()
-    let nextWeek =  today.getNextWeek()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
     let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
@@ -100,9 +91,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return only the future events in a tag ', async () => {
-    let today = new Date()
-    let yesterday =  today.getYesterday()
-    let tomorrow =  today.getTomorrow()
     let eventYesterday = mother.createAnEvent().starting(yesterday).withTags(["java"]).get()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
     await dao.new(eventToday)
@@ -114,9 +102,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return events by amount with tag java ', async () => {
-    let today = new Date()
-    let tomorrow =  today.getTomorrow()
-    let nextWeek =  today.getNextWeek()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
     let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
@@ -130,9 +115,6 @@ describe('EventDao', () =>{
   })
 
   it(' should return only the future events in a tag by amount ', async () => {
-    let today = new Date()
-    let yesterday =  today.getYesterday()
-    let tomorrow =  today.getTomorrow()
     let eventYesterday = mother.createAnEvent().starting(yesterday).withTags(["java"]).get()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
     await dao.new(eventToday)
@@ -144,9 +126,6 @@ describe('EventDao', () =>{
   })
 
     it(' should return the next 2 events in a tag ', async () => {
-    let today = new Date()
-    let tomorrow =  today.getTomorrow()
-    let nextWeek =  today.getNextWeek()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["java"]).get()
     let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
