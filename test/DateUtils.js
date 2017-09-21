@@ -9,3 +9,9 @@ Date.prototype.getTomorrow = function() {
     tomorrow.setDate(this.getDate() + 1)
     return tomorrow
 }
+
+Date.prototype.getNextWeek = function() {
+    let nextWeek = new Date(this)
+    nextWeek.setDate(this.getDate() + 7)
+    return nextWeek
+}

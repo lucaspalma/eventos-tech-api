@@ -62,6 +62,27 @@ describe('EventDao', () =>{
     })
   })
 
+  it(' should return the next 2 events ', async () => {
+    let today = new Date()
+    let yesterday =  today.getYesterday()
+    let tomorrow =  today.getTomorrow()
+    let nextWeek =  today.getNextWeek()
+    let eventYesterday = mother.createAnEvent().starting(yesterday).get()
+    let eventToday = mother.createAnEvent().starting(today).get()
+    let eventTomorrow = mother.createAnEvent().starting(tomorrow).get()
+    let eventNextWeek = mother.createAnEvent().starting(nextWeek).get()
+    await dao.new(eventToday)
+    await dao.new(eventYesterday)
+    await dao.new(eventTomorrow)
+    await dao.new(eventNextWeek)
+    let events;
+    return dao.getNextByAmount(2, (error, result) => {
+      events = getEventsFrom(result)
+    }).then(() => {
+      expect(events).to.deep.equal([eventToday, eventTomorrow])
+    })
+  })
+
   after(() => {
     mongoose.disconnect()
   })
