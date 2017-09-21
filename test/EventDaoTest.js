@@ -83,23 +83,33 @@ describe('EventDao', () =>{
     })
   })
 
-  it(' should return the next events of a tag ', async () => {
+  it(' should return events with tag java ', async () => {
     let today = new Date()
-    let yesterday =  today.getYesterday()
     let tomorrow =  today.getTomorrow()
     let nextWeek =  today.getNextWeek()
-    let eventYesterday = mother.createAnEvent().starting(yesterday).withTags(["java"]).get()
     let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
     let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
     let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
     await dao.new(eventToday)
-    await dao.new(eventYesterday)
     await dao.new(eventTomorrow)
     await dao.new(eventNextWeek)
-    let events;
     await dao.getAllNextInATag("java", (error, result) => {
       let events = getEventsFrom(result)
       expect(events).to.deep.equal([eventToday, eventNextWeek])
+    })
+  })
+
+  it(' should return only the future events in a tag ', async () => {
+    let today = new Date()
+    let yesterday =  today.getYesterday()
+    let tomorrow =  today.getTomorrow()
+    let eventYesterday = mother.createAnEvent().starting(yesterday).withTags(["java"]).get()
+    let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
+    await dao.new(eventToday)
+    await dao.new(eventYesterday)
+    await dao.getAllNextInATag("java", (error, result) => {
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventToday])
     })
   })
 
