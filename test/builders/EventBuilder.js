@@ -19,6 +19,11 @@ class EventBuilder {
         return this
     }
 
+    withTags(tags) {
+        this.event.tags = tags
+        return this
+    }
+
     get() {
         return this.event
     }
