@@ -113,6 +113,52 @@ describe('EventDao', () =>{
     })
   })
 
+  it(' should return events by amount with tag java ', async () => {
+    let today = new Date()
+    let tomorrow =  today.getTomorrow()
+    let nextWeek =  today.getNextWeek()
+    let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
+    let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
+    let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
+    await dao.new(eventToday)
+    await dao.new(eventTomorrow)
+    await dao.new(eventNextWeek)
+    await dao.getlNextInTagByAmount("java", 2, (error, result) => {
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventToday, eventNextWeek])
+    })
+  })
+
+  it(' should return only the future events in a tag by amount ', async () => {
+    let today = new Date()
+    let yesterday =  today.getYesterday()
+    let tomorrow =  today.getTomorrow()
+    let eventYesterday = mother.createAnEvent().starting(yesterday).withTags(["java"]).get()
+    let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
+    await dao.new(eventToday)
+    await dao.new(eventYesterday)
+    await dao.getlNextInTagByAmount("java", 1, (error, result) => {
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventToday])
+    })
+  })
+
+    it(' should return the next 2 events in a tag ', async () => {
+    let today = new Date()
+    let tomorrow =  today.getTomorrow()
+    let nextWeek =  today.getNextWeek()
+    let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
+    let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["java"]).get()
+    let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
+    await dao.new(eventToday)
+    await dao.new(eventTomorrow)
+    await dao.new(eventNextWeek)
+    await dao.getlNextInTagByAmount("java", 2, (error, result) => {
+      let events = getEventsFrom(result)
+      expect(events).to.deep.equal([eventToday, eventTomorrow])
+    })
+  })
+
   after(() => {
     mongoose.disconnect()
   })
