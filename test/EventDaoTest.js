@@ -78,15 +78,15 @@ describe('EventDao', () =>{
   })
 
   it(' should return events with tag java ', async () => {
-    let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
-    let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
-    let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
-    await dao.new(eventToday)
-    await dao.new(eventTomorrow)
-    await dao.new(eventNextWeek)
+    let eventJava = mother.createAnEvent().withTags(["java", "spring"]).get()
+    let eventSpring = mother.createAnEvent().withTags(["spring"]).get()
+    let eventJavaSpring = mother.createAnEvent().withTags(["java"]).get()
+    await dao.new(eventJava)
+    await dao.new(eventSpring)
+    await dao.new(eventJavaSpring)
     await dao.getAllNextInATag("java", (error, result) => {
       let events = getEventsFrom(result)
-      expect(events).to.deep.equal([eventToday, eventNextWeek])
+      expect(events).to.deep.equal([eventJava, eventJavaSpring])
     })
   })
 
@@ -102,15 +102,15 @@ describe('EventDao', () =>{
   })
 
   it(' should return events by amount with tag java ', async () => {
-    let eventToday = mother.createAnEvent().starting(today).withTags(["java", "spring"]).get()
-    let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["spring"]).get()
-    let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
-    await dao.new(eventToday)
-    await dao.new(eventTomorrow)
-    await dao.new(eventNextWeek)
+    let eventJavaSpring = mother.createAnEvent().withTags(["java", "spring"]).get()
+    let eventSpring = mother.createAnEvent().withTags(["spring"]).get()
+    let eventJava = mother.createAnEvent().withTags(["java"]).get()
+    await dao.new(eventJavaSpring)
+    await dao.new(eventSpring)
+    await dao.new(eventJava)
     await dao.getlNextInTagByAmount("java", 2, (error, result) => {
       let events = getEventsFrom(result)
-      expect(events).to.deep.equal([eventToday, eventNextWeek])
+      expect(events).to.deep.equal([eventJavaSpring, eventJava])
     })
   })
 
@@ -126,15 +126,15 @@ describe('EventDao', () =>{
   })
 
     it(' should return the next 2 events in a tag ', async () => {
-    let eventToday = mother.createAnEvent().starting(today).withTags(["java"]).get()
-    let eventTomorrow = mother.createAnEvent().starting(tomorrow).withTags(["java"]).get()
-    let eventNextWeek = mother.createAnEvent().starting(nextWeek).withTags(["java"]).get()
-    await dao.new(eventToday)
-    await dao.new(eventTomorrow)
-    await dao.new(eventNextWeek)
+    let firstEventJava = mother.createAnEvent().withTags(["java"]).get()
+    let secondEventJava = mother.createAnEvent().withTags(["java"]).get()
+    let thirdEventJava = mother.createAnEvent().withTags(["java"]).get()
+    await dao.new(firstEventJava)
+    await dao.new(secondEventJava)
+    await dao.new(thirdEventJava)
     await dao.getlNextInTagByAmount("java", 2, (error, result) => {
       let events = getEventsFrom(result)
-      expect(events).to.deep.equal([eventToday, eventTomorrow])
+      expect(events).to.deep.equal([firstEventJava, secondEventJava])
     })
   })
 
