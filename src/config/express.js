@@ -7,6 +7,7 @@ const app = express()
 require('../model/Event')
 require('../model/User')
 const event = require('../route/event')
+const user = require('../route/user')
 
 require('./mongodb')
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/event', event)
+app.use('/user', user)
 
 app.use((req, res) => {
   res.status(404).json({status: `The requested URL ${req.url} was not found on this server.`})
