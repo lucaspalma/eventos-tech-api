@@ -5,6 +5,7 @@ const compression = require('compression')
 const app = express()
 
 require('../model/Event')
+require('../model/User')
 const event = require('../route/event')
 
 require('./mongodb')
